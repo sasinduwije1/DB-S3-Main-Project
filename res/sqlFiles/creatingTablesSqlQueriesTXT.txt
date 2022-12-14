@@ -1,0 +1,127 @@
+CREATE TABLE IF NOT EXISTS Driver_assistant (
+ driver_assistant_id varchar(10),
+ driver_assistant_name varchar(30),
+ NIC varchar(30),
+ address_line1 varchar(30),
+ address_line2 varchar(30),
+ PRIMARY KEY (driver_assistant_id)
+);
+CREATE TABLE IF NOT EXISTS Store (
+ store_name varchar(30),
+ address_line1 varchar(30),
+ address_line2 varchar(30),
+ PRIMARY KEY (store_name)
+);
+CREATE TABLE IF NOT EXISTS Truck (
+ truck_id varchar(10),
+ truck_capacity int,
+ used_hours int,
+ PRIMARY KEY (truck_id)
+);
+CREATE TABLE IF NOT EXISTS Route (
+ store_name varchar(30),
+ route_id varchar(10),
+ time_taken int,
+ PRIMARY KEY (route_id),
+ FOREIGN KEY (store_name) REFERENCES Store(store_name)
+);
+CREATE TABLE IF NOT EXISTS Driver (
+ driver_id varchar(10),
+ driver_name varchar(30),
+ NIC varchar(30),
+ address_line1 varchar(30),
+ address_line2 varchar(30),
+ PRIMARY KEY (driver_id)
+);
+CREATE TABLE IF NOT EXISTS Truck_schedule (
+ truck_session_id varchar(10),
+ truck_id varchar(10),
+ driver_id varchar(10),
+ driver_assistant_id varchar(10),
+ route_id varchar(10),
+ departure_date date,
+ departure_time time,
+ arrival_date date,
+ arrival_time time,
+ PRIMARY KEY (truck_session_id),
+ FOREIGN KEY (route_id) REFERENCES Route(route_id),
+ FOREIGN KEY (driver_id) REFERENCES Driver(driver_id),
+ FOREIGN KEY (driver_assistant_id) REFERENCES Driver_assistant(driver_assistant_id),
+ FOREIGN KEY (truck_id) REFERENCES Truck(truck_id)
+);
+CREATE TABLE IF NOT EXISTS Customer (
+ customer_id varchar(10),
+ name varchar(50),
+ address_number varchar(10),
+ address_line_1 varchar(30),
+ address_line_2 varchar(30),
+ contact_number varchar(10),
+ custormer_type varchar(10),
+ PRIMARY KEY (customer_id)
+);
+CREATE TABLE IF NOT EXISTS OrderTABLE (
+ customer_id varchar(10),
+ order_id varchar(10),
+ number_of_items int,
+ order_date date,
+ order_time time,
+ total_price numeric(10,2),
+ total_capacity int,
+ route_id varchar(10),
+ delivery_state Boolean,
+ address_number varchar(10),
+ address_line_1 varchar(30),
+ address_line_2 varchar(30),
+ PRIMARY KEY (order_id),
+ FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
+ FOREIGN KEY (route_id) REFERENCES Route(route_id)
+);
+CREATE TABLE IF NOT EXISTS Order_Truck_schedule (
+ order_id varchar(10),
+ truck_session_id varchar(10),
+ PRIMARY KEY (order_id, truck_session_id),
+ FOREIGN KEY (truck_session_id) REFERENCES Truck_schedule(truck_session_id),
+ FOREIGN KEY (order_id) REFERENCES OrderTABLE(order_id)
+);
+CREATE TABLE IF NOT EXISTS Items (
+ item_id varchar(10),
+ item_name varchar(30),
+ capacity int,
+ price numeric(8,2),
+ cumulative_order_count int,
+ PRIMARY KEY (item_id)
+);
+CREATE TABLE IF NOT EXISTS Train (
+ train_id varchar(10),
+ train_capacity int,
+ PRIMARY KEY (train_id)
+);
+CREATE TABLE IF NOT EXISTS Train_schedule (
+ train_session_id varchar(10),
+ train_id varchar(10),
+ departure_time time,
+ departing_station varchar(30),
+ arrival_time time ,
+ arrival_station varchar(30),
+ departure_date date,
+ arrival_date date,
+ available_capacity int,
+ PRIMARY KEY (train_session_id),
+ FOREIGN KEY (arrival_station) REFERENCES Store(store_name),
+ FOREIGN KEY (train_id) REFERENCES Train(train_id),
+ KEY Fk (arrival_station)
+);
+CREATE TABLE IF NOT EXISTS Order_Train_schedule (
+ order_id varchar(10),
+ train_session_id varchar(10),
+ PRIMARY KEY (order_id, train_session_id),
+ FOREIGN KEY (order_id) REFERENCES OrderTABLE (order_id),
+ FOREIGN KEY (train_session_id) REFERENCES Train_schedule(train_session_id)
+);
+CREATE TABLE IF NOT EXISTS order_items (
+ order_id varchar(10),
+ item_id varchar(10),
+ PRIMARY KEY (order_id, item_id),
+ FOREIGN KEY (item_id) REFERENCES Items(item_id),
+ FOREIGN KEY (order_id) REFERENCES OrderTABLE (order_id)
+);

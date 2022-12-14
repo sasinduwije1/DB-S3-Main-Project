@@ -1,0 +1,5 @@
+mysql_host: 'sql.freedb.tech'
+mysql_port: 3306
+mysql_user: 'freedb_testuser2'
+mysql_password: '$aVAYhM8ykMmtm@'
+mysql_db: 'freedb_testdatabase3'

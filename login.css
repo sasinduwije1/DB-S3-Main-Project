@@ -1,0 +1,44 @@
+body{
+
+    background-color:black;
+    background-repeat: no-repeat;
+    background-position: 80% 20%;
+    
+    
+}
+
+.btn
+{
+    color:whitesmoke;
+}
+
+li
+{
+    color: whitesmoke;
+}
+
+p
+{
+    color: whitesmoke;
+}
+
+
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 160px;;
+    margin-bottom: auto; 
+  }
+  
+  
+  td
+  {
+      font-size: 17px;
+      color:whitesmoke;
+      padding: 17px;
+  }
+
+  .notreg
+  {
+      padding:20px;
+  }

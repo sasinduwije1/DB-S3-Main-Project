@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	 <script type="text/javascript">
+function validateform()
+{
+if(document.regForm.name.value.length==0)
+{
+alert("Please enter your name");
+return false;
+}
+if(document.regForm.userName.value.length==0)
+{
+alert("Please enter your Email");
+return false;
+}
+if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(regForm.userName.value)))
+ {
+    alert("You have entered an invalid email address!");
+	return false;
+ }
+if(document.regForm.password.value.length==0)
+{
+alert("Please enter your Password");
+return false;
+}
+if(document.regForm.password.value.length<4)
+{
+	alert("password is too short");
+	return false;
+}
+
+
+if(document.regForm.ConPassword.value.length==0)
+{
+alert("Please enter your password again");
+return false;
+}
+if(regForm.password.value != regForm.ConPassword.value)
+{
+	alert("passwords are not matching");	
+	return false;
+}
+if(document.regForm.Birthday.value.length==0)
+{
+alert("Please enter your birthday");
+return false;
+}
+if(document.regForm.NIC.value.length==0)
+{
+alert("Please enter your NIC");
+return false;
+}
+if(document.regForm.TP.value.length==0)
+{
+alert("Please enter your Telephone number");
+return false;
+}
+if(!(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(regForm.TP.value)))
+	{
+		alert("You have entered an invalid Telephone number!");
+		return false;
+	}
+}
+
+</script>
+	 
+   </head>
+<body>
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form name ="regForm" method="POST"  >
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Name</span>
+            <input type="text" name="name" placeholder="Enter your name"  >
+          </div>
+          <div class="input-box">
+            <span class="details">UserName</span>
+            <input type="text" name ="userName" placeholder="Enter your Email" >
+		  </div>
+          <div class="input-box">
+            <span class="details">Create Password</span>
+            <input type="password" name = "password" placeholder="Enter your password" >
+          </div>
+          <div class="input-box">
+            <span class="details">Confirm Password</span>
+            <input type="password" name = "ConPassword" placeholder="Confirm your password" >
+          </div>
+          <div class="input-box">
+            <span class="details">Address Number</span>
+            <input type="details"  name="Address_number" placeholder="Enter your Address number" >
+          </div>
+		  <div class="input-box">
+            <span class="details">Address Line 1</span>
+            <input type="details"  name="Address_Line_1" placeholder="Enter your Address Line 1" >
+          </div>
+		  <div class="input-box">
+            <span class="details">Address Line 2</span>
+            <input type="details"  name="Address_Line_2" placeholder="Enter your Address Line 1" >
+          </div>
+          <div class="input-box">
+            <span class="details">NIC</span>
+            <input type="text" name="NIC" placeholder="Enter your NIC">
+          </div>
+		  <div class="input-box">
+            <span class="details">Telephone Number</span>
+            <input type="text" name="TP" placeholder="Enter your Telephone Number" >
+          </div>
+		  <div class="input-box">
+		    <span class="details">Customer Type</span>
+			<select class="selectpicker" data-width="100px" data-style="btn-info" id="cus_type" name="customer_list" >
+				<option>end customer</option>
+				<option>retailer</option>
+				<option>wholesaler</option>
+			</select>
+		  </div>
+        </div>
+        <div class="button">
+          <input type="submit"  name = "Submit1" value="Register" onClick=" return validateform();" >
+        </div>
+      </form>
+	  
+    </div>
+  </div>
+
+</body>
+</html>
